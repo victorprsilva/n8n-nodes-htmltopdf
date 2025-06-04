@@ -1,0 +1,66 @@
+{
+  "name": "n8n-nodes-htmltopdf",
+  "version": "1.0.0",
+  "description": "Nó personalizado para n8n que converte HTML em PDF usando Puppeteer",
+  "keywords": [
+    "n8n",
+    "n8n-community-node-package",
+    "pdf",
+    "html",
+    "puppeteer",
+    "automation",
+    "custom-node"
+  ],
+  "license": "MIT",
+  "homepage": "https://github.com/victorprsilva/n8n-nodes-htmltopdf",
+  "author": {
+    "name": "Victor Silva",
+    "email": "victor@exemplo.com"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/victorprsilva/n8n-nodes-htmltopdf.git"
+  },
+  "bugs": {
+    "url": "https://github.com/victorprsilva/n8n-nodes-htmltopdf/issues"
+  },
+  "main": "index.js",
+  "scripts": {
+    "build": "tsc && gulp build:icons",
+    "dev": "tsc --watch",
+    "format": "prettier nodes --write",
+    "lint": "eslint \"nodes/**/*.ts\"",
+    "lintfix": "eslint \"nodes/**/*.ts\" --fix",
+    "prepublishOnly": "npm run build && npm run lint -s"
+  },
+  "files": [
+    "dist"
+  ],
+  "n8n": {
+    "n8nNodesApiVersion": 1,
+    "credentials": [],
+    "nodes": [
+      "dist/HtmlToPdf.node.js"
+    ]
+  },
+  "devDependencies": {
+    "@types/node": "^18.16.3",
+    "@typescript-eslint/eslint-plugin": "^5.45.0",
+    "@typescript-eslint/parser": "^5.45.0",
+    "eslint": "^8.29.0",
+    "eslint-plugin-n8n-nodes-base": "^1.11.0",
+    "gulp": "^4.0.2",
+    "n8n-workflow": "*",
+    "prettier": "^2.7.1",
+    "typescript": "^4.8.4"
+  },
+  "dependencies": {
+    "puppeteer": "^23.0.0"
+  },
+  "peerDependencies": {
+    "n8n-workflow": "*"
+  },
+  "engines": {
+    "node": ">=16.0.0"
+  }
+} 

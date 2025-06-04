@@ -1,0 +1,108 @@
+{
+  "name": "Exemplo HTML to PDF",
+  "nodes": [
+    {
+      "parameters": {
+        "values": {
+          "object": [
+            {
+              "name": "html",
+              "value": "<!DOCTYPE html>\n<html>\n<head>\n    <meta charset=\"UTF-8\">\n    <title>Relatório de Vendas</title>\n    <style>\n        body { font-family: Arial, sans-serif; margin: 20px; }\n        .header { background-color: #f0f0f0; padding: 20px; text-align: center; }\n        .content { margin: 20px 0; }\n        .table { width: 100%; border-collapse: collapse; }\n        .table th, .table td { border: 1px solid #ddd; padding: 8px; text-align: left; }\n        .table th { background-color: #f2f2f2; }\n    </style>\n</head>\n<body>\n    <div class=\"header\">\n        <h1>Relatório de Vendas</h1>\n        <p>Período: Janeiro 2024</p>\n    </div>\n    \n    <div class=\"content\">\n        <h2>Resumo das Vendas</h2>\n        <table class=\"table\">\n            <thead>\n                <tr>\n                    <th>Produto</th>\n                    <th>Quantidade</th>\n                    <th>Valor</th>\n                </tr>\n            </thead>\n            <tbody>\n                <tr>\n                    <td>Produto A</td>\n                    <td>10</td>\n                    <td>R$ 1.000,00</td>\n                </tr>\n                <tr>\n                    <td>Produto B</td>\n                    <td>5</td>\n                    <td>R$ 500,00</td>\n                </tr>\n                <tr>\n                    <td>Produto C</td>\n                    <td>8</td>\n                    <td>R$ 800,00</td>\n                </tr>\n            </tbody>\n        </table>\n        \n        <h3>Total: R$ 2.300,00</h3>\n    </div>\n</body>\n</html>"
+            },
+            {
+              "name": "nomeEmpresa",
+              "value": "Minha Empresa Ltda"
+            },
+            {
+              "name": "periodo",
+              "value": "Janeiro 2024"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "f6b7c8d9-e0a1-4b2c-9d3e-4f5a6b7c8d9e",
+      "name": "Dados do Relatório",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 1,
+      "position": [
+        240,
+        300
+      ]
+    },
+    {
+      "parameters": {
+        "htmlContent": "{{ $json.html }}",
+        "fileName": "relatorio-vendas.pdf",
+        "advancedOptions": {
+          "format": "A4",
+          "landscape": false,
+          "printBackground": true,
+          "margin": {
+            "marginValues": {
+              "top": "20mm",
+              "right": "15mm",
+              "bottom": "20mm",
+              "left": "15mm"
+            }
+          },
+          "saveToFolder": false,
+          "folderPath": ""
+        }
+      },
+      "id": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+      "name": "Converter para PDF",
+      "type": "n8n-nodes-htmltopdf.htmlToPdf",
+      "typeVersion": 1,
+      "position": [
+        460,
+        300
+      ]
+    },
+    {
+      "parameters": {
+        "operation": "sendEmail",
+        "email": "destinatario@exemplo.com",
+        "subject": "Relatório de Vendas - {{ $json.periodo }}",
+        "message": "Segue em anexo o relatório de vendas do período solicitado.",
+        "attachments": "data",
+        "options": {}
+      },
+      "id": "b2c3d4e5-f6a7-8901-bcde-f23456789012",
+      "name": "Enviar por Email",
+      "type": "n8n-nodes-base.emailSend",
+      "typeVersion": 1,
+      "position": [
+        680,
+        300
+      ]
+    }
+  ],
+  "connections": {
+    "Dados do Relatório": {
+      "main": [
+        [
+          {
+            "node": "Converter para PDF",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Converter para PDF": {
+      "main": [
+        [
+          {
+            "node": "Enviar por Email",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {},
+  "versionId": "1234567890"
+} 
