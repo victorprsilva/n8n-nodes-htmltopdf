@@ -101,4 +101,11 @@ test-*.ts
 
 # Arquivos temporários de desenvolvimento
 temp/
-tmp/ 
+tmp/
+
+# Documentação interna (apenas para desenvolvimento)
+INSTALLATION.md
+PUBLISH.md
+PROJECT_SUMMARY.md
+TEST_RESULTS.md
+GITHUB_SETUP.md 
